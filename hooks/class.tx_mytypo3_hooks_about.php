@@ -105,7 +105,7 @@ class tx_mytypo3_hooks_about implements tx_about_customsections {
 		);
 
 		$content = '<' . '?php' . LF;
-		$content .= "\$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3'] = ";
+		$content .= "\$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['{$this->extKey}'] = ";
 		$content .= var_export($defaultConfig, TRUE) . ';' . LF;
 		$content .= '?' . '>';
 
