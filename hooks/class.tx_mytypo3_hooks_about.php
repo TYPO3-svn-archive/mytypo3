@@ -23,7 +23,7 @@
 ***************************************************************/
 
 if (t3lib_div::int_from_ver(TYPO3_version) < 4007000) {
-	require_once(t3lib_extMgm::extPath('mytypo3') . 'hooks/interface.tx_about_customsections.php');
+	require_once(t3lib_extMgm::extPath('mytypo3') . 'interfaces/interface.tx_about_customsections.php');
 }
 
 /**
