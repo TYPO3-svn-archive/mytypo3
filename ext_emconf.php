@@ -16,6 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'misc',
 	'author' => 'Steffen Kamper, Xavier Perseguers',
 	'author_email' => 'steffen@typo3.org, typo3@perseguers.ch',
+	'author_company' => '',
 	'shy' => '',
 	'dependencies' => '',
 	'conflicts' => '',
@@ -29,8 +30,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'author_company' => '',
-	'version' => '0.0.0',
+	'version' => '0.1.0',
 	'constraints' => array(
 		'depends' => array(
 		),
