@@ -39,46 +39,77 @@ if (t3lib_div::int_from_ver(TYPO3_version) < 4007000) {
 class tx_mytypo3_hooks_about implements tx_about_customsections {
 
 	/**
+	 * @var string
+	 */
+	protected $extKey = 'mytypo3';
+
+	/**
 	 * Manipulates the About sections.
 	 *
 	 * @param array &$sections
 	 * @return void
 	 */
 	public function addSection(array &$sections) {
+		$configFile = PATH_site . 'typo3conf/' . $this->extKey . '_conf.php';
+
+			// Create default configuration
+		if (!is_file($configFile)) {
+			$this->createSampleConfiguration($configFile);
+		}
+
+			// Load configuration
+		include($configFile);
 		$config = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3'];
-		if (!is_array($config)) {
-			$config = array();
+
+			// Resolve the logo path
+		$logo = $config['logo'];
+		if (!strcmp(substr($logo, 0, 4), 'EXT:')) {
+			$path = substr($logo, 4);	// Remove 'EXT:' at the beginning
+			$extension = substr($path, 0, strpos($path, '/'));
+			$references = explode(':', substr($path, strlen($extension) + 1));
+			$logo = t3lib_extMgm::siteRelPath($extension) . $references[0];
 		}
 
-		$companyName = isset($config['company']) ? $config['company'] : 'My Own Company';
-		$companyLogo = isset($config['logo'])
-				? $GLOBALS['BACK_PATH'] . '../' . $config['logo']
-				: $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('mytypo3') . 'res/empty-logo.gif';
-		if (isset($config['description'])) {
-			$companyDescription = $config['description'];
-		} else {
-			$companyDescription = "
-				These are the default configuration settings for extension mytypo3<br />
-				<br />
-				Edit file typo3conf/localconf.php and set values for:
-				<ul>
-					<li>\$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3']['company']</li>
-					<li>\$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3']['logo']</li>
-					<li>\$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3']['description']</li>
-				</ul>
-			";
-		}
-		$sectionKey = isset($config['section']) ? $config['section'] : $companyName;
+		$documentRoot = t3lib_div::getIndpEnv('TYPO3_DOCUMENT_ROOT');
+		$logoSrc = substr(PATH_site, strlen($documentRoot)) . $logo;
 
+			// Prepare the new section
 		$content = '
 			<div class="typo3-mod-help-about-index-php-inner">
-				<h2>' . $companyName . '</h2>
-				<img src="'. $companyLogo . '" alt="' . $companyName . '" style="float:left" />
-				<p style="margin-left: 135px;">' . $companyDescription . '</p>
+				<h2>' . $config['company'] . '</h2>
+				<img src="'. $logoSrc . '" alt="' . $config['company'] . '" style="float:left" />
+				<p style="margin-left: 135px;">' . $config['description'] . '</p>
 			</div>
 		';
 
+			// Append the new section
+		$sectionKey = isset($config['section']) ? $config['section'] : $config['company'];
 		$sections[$sectionKey] = $content;
+	}
+
+	/**
+	 * Creates a sample configuration file.
+	 *
+	 * @param string $filename
+	 * @return void
+	 */
+	protected function createSampleConfiguration($filename) {
+		$defaultConfig = array(
+			'company'     => 'My Own Company',
+			'logo'        => 'EXT:' . $this->extKey . '/res/empty-logo.gif',
+			'description' => '
+				These are the default configuration settings for extension ' . $this->extKey . '.<br />
+				<br />
+				Please edit file ' . substr($filename, strlen(PATH_site)) . ' to fit your needs.
+			',
+		);
+
+		$content = '<' . '?php' . LF;
+		$content .= "\$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3'] = ";
+		$content .= var_export($defaultConfig, TRUE) . ';' . LF;
+		$content .= '?' . '>';
+
+		t3lib_div::writeFile($filename, $content);
 	}
 
 }
