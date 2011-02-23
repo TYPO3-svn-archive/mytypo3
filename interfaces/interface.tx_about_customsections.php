@@ -29,11 +29,13 @@
 interface tx_about_customSections {
 
 	/**
+	 * Add custom sections to the about module
+	 *
 	 * @abstract
 	 * @param  array $sections
 	 * @return void
 	 */
-	public function addSection(&$sections);
+	public function addSection(array &$sections);
 }
 
 ?>

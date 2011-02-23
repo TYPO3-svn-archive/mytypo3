@@ -44,7 +44,7 @@ class tx_mytypo3_hooks_about implements tx_about_customsections {
 	 * @param array &$sections
 	 * @return void
 	 */
-	public function addSection(&$sections) {
+	public function addSection(array &$sections) {
 		$config = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['mytypo3'];
 		if (!is_array($config)) {
 			$config = array();
@@ -78,20 +78,7 @@ class tx_mytypo3_hooks_about implements tx_about_customsections {
 			</div>
 		';
 
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4006000 && $sectionKey === 'donation') {
-			// There is no donation section before TYPO3 4.6. Place the block right after
-			// section 'about'
-			$temp = array();
-			foreach ($sections as $key => $section) {
-				$temp[$key] = $section;
-				if ($key === 'about') {
-					$temp[$sectionKey] = $content;
-				}
-			}
-			$sections = $temp;
-		} else {
-			$sections[$sectionKey] = $content;
-		}
+		$sections[$sectionKey] = $content;
 	}
 
 }

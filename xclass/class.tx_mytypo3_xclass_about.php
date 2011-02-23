@@ -34,27 +34,6 @@
  */
 class ux_SC_mod_help_about_index extends SC_mod_help_about_index {
 
-		// Internal, dynamic:
-	/**
-	 * @var array
-	 */
-	public $MCONF = array();
-
-	/**
-	 * @var array
-	 */
-	public $MOD_MENU = array();
-
-	/**
-	 * @var array
-	 */
-	public $MOD_SETTINGS = array();
-
-	/**
-	 * @var string
-	 */
-	protected $content = '';
-
 	/**
 	 * @var array
 	 */
@@ -109,15 +88,6 @@ class ux_SC_mod_help_about_index extends SC_mod_help_about_index {
         </div>';
 
 		return $content;
-	}
-
-	/**
-	 * Outputs the accumulated content to screen
-	 *
-	 * @return	void
-	 */
-	public function printContent() {
-		echo $this->content;
 	}
 
 	/**
@@ -179,8 +149,8 @@ class ux_SC_mod_help_about_index extends SC_mod_help_about_index {
 	protected function render3rdPartyCredits() {
 		$content = '
 			<div class="typo3-mod-help-about-index-php-inner">
-				<h2>' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_mod_help_about.xml:external_libraries', true) . '</h2>
-				<p>' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_mod_help_about.xml:external_thanks', true) . '</p>
+				<h2>External Libraries</h2>
+				<p>TYPO3 core uses and thanks these external Open Source projets:</p>
 				<br />
 				<table border="0" cellspacing="2" cellpadding="1">
 				<tr><td width="280">Audio player Plugin</td><td><a href="http://www.1pixelout.net/code/audio-player-wordpress-plugin/" target="_blank">www.1pixelout.net</a></td></tr>
@@ -248,32 +218,6 @@ class ux_SC_mod_help_about_index extends SC_mod_help_about_index {
 		}
 	}
 
-
-	/**
-	 * Gets the author names from the installed extensions
-	 *
-	 * @return	string	list of extensions authors and their e-mail
-	 */
-	protected function getExtensionAuthors() {
-		$content = '<table border="0" cellspacing="2" cellpadding="1"><tr><th>' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_mod_help_about.xml:extension', true) . '</th><th>' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_mod_help_about.xml:extension_author', true) . '</th></tr>';
-
-		$loadedExtensions = $GLOBALS['TYPO3_LOADED_EXT'];
-		foreach ($loadedExtensions as $extensionKey => $extension) {
-			if (is_array($extension) && $extension['type'] != 'S') {
-				$emconfPath = PATH_site . $extension['siteRelPath'] . 'ext_emconf.php';
-				include($emconfPath);
-
-				$emconf = $EM_CONF['']; // ext key is not set when loading the ext_emconf.php directly
-
-				$content .= '<tr><td width="280">' . $emconf['title'] . ' (' . $extensionKey . ')</td>' .
-						'<td><a href="mailto:' . $emconf['author_email'] . '?subject=' . rawurlencode('Thanks for your ' . $emconf['title'] . ' extension') . '">' . $emconf['author'] . '</a></td></tr>';
-			}
-		}
-
-		$content .= '</table>';
-
-		return $content;
-	}
 }
 
 ?>
