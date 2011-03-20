@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "mytypo3".
 #
-# Auto generated 23-02-2011 14:15
+# Auto generated 20-03-2011 21:41
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -23,14 +23,14 @@ $EM_CONF[$_EXTKEY] = array(
 	'priority' => '',
 	'module' => '',
 	'doNotLoadInFE' => 1,
-	'state' => 'alpha',
+	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => 0,
 	'createDirs' => '',
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '0.1.0',
+	'version' => '0.1.1',
 	'constraints' => array(
 		'depends' => array(
 		),
@@ -39,7 +39,9 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 		),
 	),
-	'_md5_values_when_last_written' => 'a:4:{s:9:"ChangeLog";s:4:"fb51";s:12:"ext_icon.gif";s:4:"1bdc";s:19:"doc/wizard_form.dat";s:4:"0588";s:20:"doc/wizard_form.html";s:4:"90f2";}',
+	'_md5_values_when_last_written' => 'a:8:{s:9:"ChangeLog";s:4:"872b";s:12:"ext_icon.gif";s:4:"1f2b";s:17:"ext_localconf.php";s:4:"2d8a";s:14:"doc/manual.sxw";s:4:"beaa";s:38:"hooks/class.tx_mytypo3_hooks_about.php";s:4:"f816";s:48:"interfaces/interface.tx_about_customsections.php";s:4:"3402";s:18:"res/empty-logo.gif";s:4:"38c8";s:40:"xclass/class.tx_mytypo3_xclass_about.php";s:4:"0578";}',
+	'suggests' => array(
+	),
 );
 
 ?>
