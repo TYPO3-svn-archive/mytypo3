@@ -1,5 +1,6 @@
 2011-08-25  Xavier Perseguers  <xavier@causal.ch>
 
+	* [TASK] Add a report to check if latest version of TYPO3 is installed
 	* [BUGFIX] Remove calls to deprecated methods in TYPO3 4.6
 
 2011-02-23  Xavier Perseguers  <xavier@causal.ch>
