@@ -194,7 +194,7 @@ class ux_SC_mod_help_about_index extends SC_mod_help_about_index {
 			<div class="typo3-mod-help-about-index-php-inner">
 				<h2>' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_mod_help_about.xml:extension_authors', TRUE) . '</h2>
 				<p>' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_mod_help_about.xml:extension_list_info', TRUE) . '</p>
-				<br />' . $this->getExtensionAuthors() . '
+				<br />' . parent::renderExtensionAuthors() . '
 			</div>';
 
 		$this->sections['authors'] = $content;
@@ -206,7 +206,7 @@ class ux_SC_mod_help_about_index extends SC_mod_help_about_index {
 	 * @return void
 	 */
 	protected function renderCustomSections() {
-		//hook for custom sections
+			// hook for custom sections
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['about/index.php']['addSection'])) {
 			foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['about/index.php']['addSection'] as $classRef) {
 				$hookObject = t3lib_div::getUserObj($classRef);
