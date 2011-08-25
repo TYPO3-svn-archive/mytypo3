@@ -22,7 +22,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-if (t3lib_div::int_from_ver(TYPO3_version) < 4007000) {
+$version = class_exists('t3lib_utility_VersionNumber')
+		? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
+		: t3lib_div::int_from_ver(TYPO3_version);
+if ($version < 4006000) {
 	require_once(t3lib_extMgm::extPath('mytypo3') . 'interfaces/interface.tx_about_customsections.php');
 }
 
@@ -36,7 +39,7 @@ if (t3lib_div::int_from_ver(TYPO3_version) < 4007000) {
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class tx_mytypo3_hooks_about implements tx_about_customsections {
+class tx_mytypo3_hooks_about implements tx_about_customSections {
 
 	/**
 	 * @var string

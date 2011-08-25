@@ -1,5 +1,9 @@
+2011-08-25  Xavier Perseguers  <xavier@causal.ch>
+
+	* [BUGFIX] Remove calls to deprecated methods in TYPO3 4.6
+
 2011-02-23  Xavier Perseguers  <xavier@causal.ch>
 
-	* Added documentation
-	* Externalized configuration as typo3conf/mytypo3_conf.php
-	* Initial implementation
+	* [TASK][DOC] Added documentation
+	* [TASK] Externalized configuration as typo3conf/mytypo3_conf.php
+	* [TASK] Initial implementation
